@@ -31,7 +31,7 @@ The Anki window should popup on your Windows screen and the audio should also pl
 * To map a local folder to store the Anki data and/or addons, execute:
 
 ```
-docker run -d -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 -v $(pwd)/anki-data:/home/anki-user/Documents/Anki txgio/anki
+docker run -d -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 -v $(pwd)/anki-data:/home/anki-user/Documents/Anki txgio/anki:2.0.45
 ```
 
 Although the above method to map the data should work on a Linux machine, on a Windows environment it won't work properly, because SQLite doesn't quite work over a VirtualBox share.
@@ -40,21 +40,29 @@ So I also provide some utility images to import and/or export data between your 
 * Create the Anki container (or a data container if you prefer (actually I prefer the data container, since if I need to change the X Server and Pulse Sever IP Addresses it would be easier)):
 
 ```
-docker create --name anki-japanese -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 txgio/anki:dev
+docker create --name anki-japanese -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 txgio/anki:2.0.45
 ```
 
 * Now import the local data by using my importing image:
 
 ```
-docker run -it --rm -v $(pwd)/anki-data:/import --volumes-from anki-japanese txgio/anki-import
+docker run -it --rm -v $(pwd)/anki-data:/import --volumes-from anki-japanese txgio/anki:import
 ```
 
-So now the container anki-japanese has all of the data and can run with your existing Anki profile(s). I suggest you to keep this anki-japanese container and start to review Anki only using it. If you need to change the IPs of the X Server or Pulseaudio server, just use this container as a data container and create another one using the volumes from it (--volumes-from).
+So now the container anki-japanese has all of the data and can run with your existing Anki profile(s). I suggest you to keep this anki-japanese container and start to review Anki only using it.
+
+* Start the container:
+
+```
+docker start anki-japanese
+```
+
+If you need to change the IPs of the X Server or Pulseaudio server, just use this container as a data container and create another one using the volumes from it (--volumes-from).
 
 * Now if you want to export the data back to your local machine just use the following procedure:
 
 ```
-docker run -it --rm -v $(pwd)/anki-data:/export --volumes-from anki-japanese txgio/anki-export
+docker run -it --rm -v $(pwd)/anki-data:/export --volumes-from anki-japanese txgio/anki:export
 ```
 
 ### Linux Environment

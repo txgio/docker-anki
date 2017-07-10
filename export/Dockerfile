@@ -1,4 +1,4 @@
-FROM txgio/anki:dev
+FROM txgio/anki:2.0.45
 
 RUN apt-get update && \
     apt-get install -y rsync && \
