@@ -12,4 +12,4 @@ RUN apt-get update && \
 # Setting up Japanese IME
 ENV XMODIFIERS @im=ibus
 
-CMD /bin/bash -c "(/usr/bin/ibus-daemon -xd; anki;)"
+CMD /bin/bash -c "(/usr/bin/ibus-daemon -xd; anki -b /data;)"
