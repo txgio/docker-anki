@@ -23,7 +23,7 @@ It uses a pulseaudio client to redirect the audio to a pulseaudio server. (on Wi
 * Execute the following command:
 
 ```
-docker run -d -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 txgio/anki
+docker run -d -e DISPLAY=192.168.99.1:0.0 -e PULSE_SERVER=192.168.99.1 txgio/anki:2.0.45
 ```
 
 The Anki window should popup on your Windows screen and the audio should also play on your Windows machine.
