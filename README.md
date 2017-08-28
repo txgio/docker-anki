@@ -65,6 +65,14 @@ If you need to change the IPs of the X Server or Pulseaudio server, just use thi
 docker run -it --rm -v $(pwd)/anki-data:/export --volumes-from anki-japanese txgio/anki:export
 ```
 
+#### Stoping the container
+
+You can't use docker stop to stop this container gracefully. Apparently Anki traps the SIGINT signal to stop gracefully. (You can see that in the file aqt/main.py on the Anki repository). So, to stop it gracefully you will need to issue (if you stop it by using docker stop your data might not be saved, so be aware):
+
+```
+docker kill --signal=SIGINT anki-japanese
+``` 
+
 ### Linux Environment
 TODO
 
