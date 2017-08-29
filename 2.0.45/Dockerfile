@@ -8,14 +8,15 @@
 FROM ubuntu:12.04
 
 RUN apt-get update && \
+
     # Pulseaudio is used to redirect the audio
     apt-get install -y pulseaudio && \
 
     # Desktop utilities required by Anki
     apt-get install -y xdg-utils && \
 
-    # Audio tools required by Anki
-    apt-get install -y mplayer && \
+    # Audio and video tools required by Anki
+    apt-get install -y mplayer lame sox && \
 
     # i18n lib required by Anki
     apt-get install -y libicu48 && \
